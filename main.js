@@ -40,6 +40,19 @@ function calcularPrecio() {
     }
     parrafoResultado.textContent = `El precio final para el dia ${dia} con ${numPersonas} es de : $${precioFinal}`;
 }
+
+// Funciones para Storage
+function almacenarReserva(reserva) {
+    const reservasGuardadas = JSON.parse(localStorage.getItem('reservas')) || [];
+    reservasGuardadas.push(reserva);
+    localStorage.setItem('reservas', JSON.stringify(reservasGuardadas));
+}
+
+function obtenerReservas() {
+    const reservasGuardadas = JSON.parse(localStorage.getItem('reservas')) || [];
+    return reservasGuardadas;
+}
+
 function Reserva(info) {
     this.nombre = info.nombre;
     this.telefono = info.telefono;
@@ -81,7 +94,24 @@ function hacerReserva() {
 
     reservas.push(reservationInfo);
 
-    console.log(reservationInfo);
-    alert('Reserva realizada con éxito. Información guardada en el objeto Reservation.');
+    almacenarReserva(reservationInfo);
+
+    console.log('Reserva almacenada:', reservationInfo);
+    alert('Reserva realizada con éxito. La información se ha guardado en la reserva.');
     console.log(reservas);
 }
+
+const todasLasReservas = obtenerReservas();
+console.log('Todas las reservas:', todasLasReservas);
+
+
+//event listener para hacer el fondo de de la pagina dinamico de acuerdo al movimiento del mouse
+document.addEventListener('DOMContentLoaded', function () {
+    const background = document.querySelector('.background');
+
+    document.addEventListener('mousemove', function (e) {
+        const xPos = -(e.clientX / window.innerWidth * 10 - 5);
+        const yPos = -(e.clientY / window.innerHeight * 10 - 5);
+        background.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    });
+});

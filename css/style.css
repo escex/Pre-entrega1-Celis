@@ -1,6 +1,5 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: url(https://mrwallpaper.com/images/hd/caribbean-beach-landscape-yugvx6pdt2xbqgvt.jpg);
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,11 +8,29 @@ body {
     height: 100vh;
 }
 
+.background {
+    position: fixed;
+    /* top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; */
+    top: -50px; 
+    left: -50px;
+    width: calc(100vw + 100px); 
+    height: calc(100vh + 100px);
+    background: url(https://mrwallpaper.com/images/hd/caribbean-beach-landscape-yugvx6pdt2xbqgvt.jpg) center/cover no-repeat;
+    filter: grayscale(50%);
+    pointer-events: none; 
+    z-index: -1; 
+}
+
 .container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/*     position: relative;*/    
+    z-index: 1;
 }
 
 label {
