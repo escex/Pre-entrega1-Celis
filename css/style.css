@@ -14,14 +14,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%; */
-    top: -50px; 
+    top: -50px;
     left: -50px;
-    width: calc(100vw + 100px); 
+    width: calc(100vw + 100px);
     height: calc(100vh + 100px);
     background: url(https://mrwallpaper.com/images/hd/caribbean-beach-landscape-yugvx6pdt2xbqgvt.jpg) center/cover no-repeat;
     filter: grayscale(50%);
-    pointer-events: none; 
-    z-index: -1; 
+    pointer-events: none;
+    z-index: -1;
 }
 
 .container {
@@ -29,7 +29,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-/*     position: relative;*/    
+    /*     position: relative;*/
     z-index: 1;
 }
 
@@ -64,3 +64,35 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.swal2-title {
+    font-size: 20px;
+}
+
+.swal2-text {
+    font-size: 12px;
+}
+
+.infoClima {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ffffffc4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .icon img {
+    width: 100%;
+    height: 100%;
+  }

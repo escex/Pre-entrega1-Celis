@@ -39,6 +39,47 @@ function calcularPrecio() {
         precioFinal += precioBase * multiplicador;
     }
     parrafoResultado.textContent = `El precio final para el dia ${dia} con ${numPersonas} es de : $${precioFinal}`;
+    //Timeout para recordar descuentos
+    setTimeout(() => {
+        Swal.fire({
+            text:'Recuerda: Todos los martes y miercoles hay 20% de descuento! '
+        });
+    }, 2000)
+}
+
+//Funcion con promesa para checkear disponibilidad
+function checkAvailability(selectedDay) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const availableDays = ['Lunes','Martes', 'Miercoles','Viernes','Domingo'];
+            if (availableDays.includes(selectedDay)) {
+                resolve('¡El día está disponible para reservas!');
+            } else {
+                reject('Lo siento, el día seleccionado no está disponible para reservas.');
+            }
+        }, 1000); 
+    });
+}
+//Usando boton
+function verDisponibilidad() {
+    const selectedDay = document.getElementById('dia').value;
+    checkAvailability(selectedDay)
+        .then((message) => {
+            Swal.fire({
+                title: 'Dia Disponible',
+                text: message,
+                icon: 'success'
+            });
+            document.getElementById('hacerReservaBtn').removeAttribute('hidden');
+        })
+        .catch((error) => {
+            Swal.fire({
+                title: 'Dia No Disponible',
+                text: error,
+                icon: 'error'
+            });
+            document.getElementById('hacerReservaBtn').setAttribute('hidden', 'true');
+        });
 }
 
 // Funciones para Storage
@@ -97,7 +138,10 @@ function hacerReserva() {
     almacenarReserva(reservationInfo);
 
     console.log('Reserva almacenada:', reservationInfo);
-    alert('Reserva realizada con éxito. La información se ha guardado en la reserva.');
+    Swal.fire({
+        title:'Reserva Confirmada',
+        text:'Reserva realizada con éxito. La información se ha guardado en la reserva.'
+    });
     console.log(reservas);
 }
 
@@ -115,3 +159,24 @@ document.addEventListener('DOMContentLoaded', function () {
         background.style.transform = `translate(${xPos}px, ${yPos}px)`;
     });
 });
+
+
+//usando fetch para obtener clima
+const API_KEY = 'db736d81afbcb41c09fdbb5550725a80';
+const CITY = '3893865';
+const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric`;
+
+const weatherIcon = document.querySelector('.icon img');
+const temperature = document.querySelector('.temperature');
+const description = document.querySelector('.description');
+
+fetch(WEATHER_API)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    const iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+    weatherIcon.setAttribute('src', iconURL);
+    temperature.textContent = `${data.main.temp}°C`;
+    description.textContent = data.weather[0].description;
+  })
+  .catch(error => console.log(error));
