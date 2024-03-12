@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //usando fetch para obtener clima
 const API_KEY = 'db736d81afbcb41c09fdbb5550725a80';
-const CITY = '3893865';
+const CITY = 'Ostrov%20Paskhi';
 const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric`;
 
 const weatherIcon = document.querySelector('.icon img');
