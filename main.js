@@ -180,3 +180,25 @@ fetch(WEATHER_API)
     description.textContent = data.weather[0].description;
   })
   .catch(error => console.log(error));
+
+  function reservaRender() {
+    const containerReserva = document.getElementById('container-reservas');
+    containerReserva.innerHTML = '';
+
+    const reservations = obtenerReservas();
+
+    if (reservations.length === 0) {
+        containerReserva.innerHTML = '<p>No hay reservas realizadas.</p>';
+    } else {
+        const ul = document.createElement('ul');
+        reservations.forEach(reserva => {
+            const li = document.createElement('li');
+            li.textContent = `Nombre: ${reserva.nombre}, Dia: ${reserva.dia}, Personas: ${reserva.numPersonas}, Precio Final: ${reserva.precioFinal}`;
+            ul.appendChild(li);
+        });
+        containerReserva.appendChild(ul);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', reservaRender);
+
