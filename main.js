@@ -143,6 +143,8 @@ function hacerReserva() {
         text:'Reserva realizada con éxito. La información se ha guardado en la reserva.'
     });
     console.log(reservas);
+    
+    renderReservations();
 }
 
 const todasLasReservas = obtenerReservas();
